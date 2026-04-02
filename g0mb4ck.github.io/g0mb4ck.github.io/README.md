@@ -8,4 +8,4 @@ I have an utmost fascination with the physical world, electromagnetic waves and 
 
 The philosophy behind LunarLabs. LunarLabs Project is a future hardware security project with a clear and deep focus on hardware security R&D. This blog is a way to introduce it to the world as it is given birth to. The flabbergasting shape of the gömböc is not only my own "hacker name" inspiration but also inspiration to the whole project. It embodies the unlikely instance of a being - being - pulled down by adversities but yet still lingering on standing up. And that resilience should be not only the goal of humans but also the goal of CPU, MCU and SoC designers.
 
-If you want to collaborate on hardware security projects with me I would be very glad to hear from you on g0mb4ck@gmail.com or milena.mangiola@cnit.it (for more academic researches).
+If you want to collaborate on hardware security projects with me I would be very glad to hear from you on g0mb4ck@gmail.com or g0mb4ck@lunarlabs.it.
