@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lunar Labs Project</title>
+    <link>https://lunarlabs.it/</link>
+    <description>Recent content on L☾nar Labs Project</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Jul 2025 14:03:20 +0200</lastBuildDate>
+    <atom:link href="https://lunarlabs.it/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Piantagione</title>
+      <link>https://lunarlabs.it/posts/piantagione/</link>
+      <pubDate>Wed, 23 Jul 2025 14:03:20 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/piantagione/</guid>
+      <description>An IoT-based automated strawberry farming system using Raspberry Pi. It monitors and controls temperature, humidity, soil moisture, and lighting using sensors and actuators. Features include automated irrigation, climate control, remote monitoring. Data is logged and accessible via a web grafana dashboard.</description>
+    </item>
+    <item>
+      <title>upcoming post</title>
+      <link>https://lunarlabs.it/posts/coming-s00n/</link>
+      <pubDate>Wed, 23 Jul 2025 12:36:20 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/coming-s00n/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Misbehaving while awake: NRF52810 Runtime
+EM Fault Injection APPROTECT Bypass - (CVE-2025-9709)</title>
+      <link>https://lunarlabs.it/posts/misbehaving-while-awake-1/</link>
+      <pubDate>Sat, 06 Sep 2025 12:36:17 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/misbehaving-while-awake-1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

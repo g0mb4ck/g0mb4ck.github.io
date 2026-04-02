@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on L☾nar Labs Project</title>
+    <link>https://lunarlabs.it/posts/</link>
+    <description>Recent content in Posts on L☾nar Labs Project</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Jul 2025 14:03:20 +0200</lastBuildDate>
+    <atom:link href="https://lunarlabs.it/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Piantagione</title>
+      <link>https://lunarlabs.it/posts/piantagione/</link>
+      <pubDate>Wed, 23 Jul 2025 14:03:20 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/piantagione/</guid>
+      <description>An IoT-based automated strawberry farming system using Raspberry Pi. It monitors and controls temperature, humidity, soil moisture, and lighting using sensors and actuators. Features include automated irrigation, climate control, remote monitoring. Data is logged and accessible via a web grafana dashboard.</description>
+    </item>
+    <item>
+      <title>upcoming post</title>
+      <link>https://lunarlabs.it/posts/coming-s00n/</link>
+      <pubDate>Wed, 23 Jul 2025 12:36:20 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/coming-s00n/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Misbehaving while awake: NRF52810 Runtime
+EM Fault Injection APPROTECT Bypass - (CVE-2025-9709)</title>
+      <link>https://lunarlabs.it/posts/misbehaving-while-awake-1/</link>
+      <pubDate>Sat, 6 Sep 2025 12:36:17 +0200</pubDate>
+      <guid>https://lunarlabs.it/posts/misbehaving-while-awake-1/</guid>
+      <description>In this research a novel, runtime fault injection attack on Nordic Semi’s
+NRF52810 System-on-Chip (SoC) using electromagnetic (EM) fault injection is demonstrated. Achieving reliable and reproducible fault induction
+is incredibly simple as in this SoC the EM injection does not have to be neither precise nor accurately timed. The attack has success on the first
+pulse. These findings expand the threat model by showing that stealthy attacks can be performed in-field without necessarily altering the chip.
+This emphasizes the urgent need for advanced countermeasures, including EM shielding, fault detection circuitry, and software verification mechanisms, to defend against runtime EM-based fault injections. This work
+highlights a critical security gap in modern SoCs and stresses the importance of securing the entire execution environment, not just static chip
+properties. A practical, effective fault injection method is presented and the hardware hacking community is urged to focus on these runtime attack
+vectors.</description>
+    </item>
+  </channel>
+</rss>

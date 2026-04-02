@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Misbehaving while awake: NRF52810 Runtime
+EM Fault Injection APPROTECT Bypass - (CVE-2025-9709)</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link defer rel="stylesheet" href="/css/syntax.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js"></script>
+
+<style>
+    #open-pdf-btn {
+    margin: 20px 0;
+    margin-right: 20px; 
+    margin-left: 20px;
+    background: #e44e17;
+    border: 2px solid #260061;
+    box-shadow: 0 0 15px #260061;
+    font-family: "Ubuntu Mono", monospace;
+    font: bolder;
+    color: #260061;
+    border-radius: 12px;
+    }
+    #pdf-popup {
+    display: none;
+    position: fixed;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 90%;
+    background: #C6C6C6;
+    border: 2px solid #260061;
+    box-shadow: 0 0 15px #260061;
+    z-index: 1000;
+    overflow: auto;
+    padding: 10px;
+    font-family: "Ubuntu Mono", monospace;
+}
+#pdf-popup canvas {
+    width: 100%;
+    height: auto;
+    font-family: "Ubuntu Mono", monospace;
+}
+#close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    background: #e44e17;
+    color: #C6C6C6;
+    border: none;
+    padding: 5px 10px;
+    font-family: "Ubuntu Mono", monospace;
+}
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #260061;
+    z-index: 900;
+    font-family: "Ubuntu Mono", monospace;
+}
+
+    </style>
+</head><body><header>
+    <a id="site-title" href="/">
+        Lunar Labs Project
+    </a>
+    <section id="social-links" class="header-group">
+        <a href=https://github.com/g0mb4ck class="header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+        </a>
+        <a href=https://en.wikipedia.org/wiki/G%C3%B6mb%C3%B6c class="header-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+  <path d="M8 1.314C3.562-3.248-7.534 4.735 8 15c15.534-10.265 4.438-18.248 0-13.686z"/>
+</svg>
+
+        </a>
+
+<a href="/about.html" class="header-icon">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-moon" viewBox="0 0 16 16">
+  <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+</svg>
+</a>
+    </section>
+</header>
+
+<section id="post">
+    <h1 id="post-title">Misbehaving while awake: NRF52810 Runtime
+EM Fault Injection APPROTECT Bypass - (CVE-2025-9709)</h1>
+    <time>
+        2025-09-05
+    </time>
+    <hr />
+    <h2 id="post-content" style="font-size: medium;">Abstract </h2>
+        <p style="font-size: smaller;">In this research a novel, runtime fault injection attack on Nordic Semi’s
+NRF52810 System-on-Chip (SoC) using electromagnetic (EM) fault injection is demonstrated. Achieving reliable and reproducible fault induction
+is incredibly simple as in this SoC the EM injection does not have to be neither precise nor accurately timed. The attack has success on the first
+pulse. These findings expand the threat model by showing that stealthy attacks can be performed in-field without necessarily altering the chip.
+This emphasizes the urgent need for advanced countermeasures, including EM shielding, fault detection circuitry, and software verification mechanisms, to defend against runtime EM-based fault injections. This work
+highlights a critical security gap in modern SoCs and stresses the importance of securing the entire execution environment, not just static chip
+properties. A practical, effective fault injection method is presented and the hardware hacking community is urged to focus on these runtime attack
+vectors.</p>
+    <hr />
+  <div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+        <p><strong>Differences from the Limited Results work.</strong> The arguments against the novelty of the attacks can be several and all traced
+down to Limited Results (most respectable) 2020 work <a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a>. At first sight (fault
+injection on the same hardware already proven to be vulnerable to it by the
+vulnerability researcher Limited Results), it could look the same to untrained
+eyes, however these arguments can be easily dismissed by the following statement: the former attack had its novelty back then in being at boot time whilst
+the currently overviewed one is at runtime. Which has its implications both in
+the hypothetical hardware remediations and also in terms of impact.</p>
+</div>
+  <div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+        <p><strong>The Target: nRF52810 inside ISP507-AL packaging.</strong> The nRF52810 is an 8 year old (2017) SoC belonging to the nRF52 SoC (system
+on chip) family. Nordic has implemented back then the so called APPROTECT protection for SWD (anti-)debugging purposes (to literally protect the access
+port). As dev boards of actual nRF52810 hardware (what Nordic sells you is a board with nRF52832 to emulate nRF52810 on - see <a href="https://eu.mouser.com/datasheet/2/297/nRF52_DK_User_Guide_v1_3_1-3011302.pdf" target="_blank">[3]</a> for more details) do not
+exist, this board has been used (or more precisely, several instances of it) <a href="https://eu.mouser.com/datasheet/2/889/isp_ble_DS1507-1221980.pdf" target="_blank">[4]</a> for
+the experiment. A RaspberryPi Pico to power on the device (pin 36 and pin 38
+- VCC out and GND of the Pico) - see Figure 1.</p></div>  <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/pipo_pinout.jpg" style="max-width: inherit; max-height: inherit;width: 250pt;" >
+<img src="/static/images/probe_position.jpeg" style="max-width: inherit; max-height: inherit;width: 250pt;" >
+  <figcaption><strong>Figure 1:</strong> Raspberry Pi Pico Pinout.; 
+<strong>Figure 2:</strong> CCW (counter-clockwise) 4 mm antenna tip for ChipShouter in the successful attack position.</figcaption>
+</figure></div>
+<p> A ChipShouter <a href="https://www.newae.com/products/nae-cw520" target="_blank">[5]</a> was used with a 4mm CCW probe tip (yet also other probes
+work, with just very subtle differences in outcome - position is immensely more
+important in this experiment).</p>
+
+ </div>
+
+<p>More precisely the chip was loaded with the following code:</p>
+<pre><code class="language-c">#include "nrf_gpio.h" // Nordic SDK header for GPIO manipulation
+#include "nrf_delay.h"
+// --- Configuration ---
+// Choose a GPIO pin to turn on.
+// P0.17 is listed as available on the ISP1507-AL in the provided documentation [2, 5].
+// You can change NRF_GPIO_PIN_MAP(0, 17) to any other available GPIO pin.
+// For example, NRF_GPIO_PIN_MAP(0, 13) for P0.13, etc. 2
+// Please ensure the chosen pin is not used for other critical functions (like SWD, XTAL, etc.)
+// and is accessible on your ISP1507-AL-TB.
+#define RESET_INDICATOR_GPIO_PIN NRF_GPIO_PIN_MAP(0, 17) // Example: P0.17 - I used this one
+/**
+* @brief Function for application main entry.
+*/
+int main(void)
+{
+// --- Turn on GPIO pin on reset ---
+// 1. Configure the chosen GPIO pin as a standard output.
+nrf_gpio_cfg_output(RESET_INDICATOR_GPIO_PIN);
+// 2. Set the GPIO pin high.
+// If you want to turn it "off" (low), use nrf_gpio_pin_clear().
+while (true){
+nrf_gpio_pin_set(RESET_INDICATOR_GPIO_PIN);
+nrf_delay_us(10000);
+nrf_gpio_pin_clear(RESET_INDICATOR_GPIO_PIN);
+nrf_delay_us(10000);
+}</code></pre>
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+    <p>then the protection set up using nrfutil device protection set All using jlink
+mini edu attached to the target. Then PCBbites <a href="https://sensepeek.com/pcbite-20" target="_blank">[6]</a> were used to connect
+everything to the jlink mini edu <a href="https://www.segger.com/products/debug-probes/j-link/models/j-link-edu-mini/" target="_blank">[7]</a> and the dev board, and the voltage on the
+P0.17 pin of the board was measured with the help of <a href="https://sensepeek.com/sq500-500mhz-handsfree-oscilloscope-probe/" target="_blank">[8]</a> and the use of a Rigol
+DHO4804. P0.17 acts like a canary: if it stops outputting 3.3V in a cyclical
+manner, for 1 ms circa it means the attack is similar in nature to  <a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a>, otherwise
+not. This is directly connected to the nature of the gpio pin: it behaves normally
+(or it resets for less than 1 ms, which is  <a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a>’s attack timing) while being glitched
+successfully (the SWD is debuggable again), the glitch is at runtime.</p></div>
+    <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/rigol_dho4804.jpeg" style="justify-content: center ;max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 3:</strong> The Rigol oscilloscope used in the experiment for the measurements.
+</figcaption>
+</figure></div>
+    
+
+ <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/probe_pogo.jpg" style="justify-content: center ;max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 4:</strong> PCBite used in the attack, less invasive, no soldering needed.
+</figcaption></figure></div><p>Why a clock and not a simple linear 3.3V on the GPIO? Because this way it is
+possible to distinguish full resets of the SoC from soft resets and so on. If a low
+(0) digital signal is perceived by the probe right before the glitch and it stays
+up right after the glitch for longer than a clock cycle this means the chip has be
+fully booted. This does not happen here, as it will be discussed below. </p>   
+</div>
+
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+    <p>In the schematics attached hereby the P0.17 pin can be observed.</p>
+
+          <button id="open-pdf-btn">open schematics</button>
+
+  <div id="overlay"></div>
+  <div id="pdf-popup">
+    <button id="close-btn">close</button>
+    <canvas id="pdf-canvas"></canvas>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('open-pdf-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const popup = document.getElementById('pdf-popup');
+    const overlay = document.getElementById('overlay');
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+    const url = 'https://lunarlabs.it/static/images/ISP1507_AL_TB_Schematic.pdf';
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
+    function renderPDF() {
+      pdfjsLib.getDocument(url).promise.then(pdf => {
+        pdf.getPage(1).then(page => {
+          const scale = 1.5;
+          const viewport = page.getViewport({ scale: scale });
+
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          page.render({ canvasContext: ctx, viewport: viewport });
+        });
+      });
+    }
+
+    openBtn.addEventListener('click', () => {
+      popup.style.display = 'block';
+      overlay.style.display = 'block';
+      renderPDF();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    overlay.addEventListener('click', () => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+<p><strong>Figure 5:</strong> All property of Insight SiP</p>
+</div>
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+
+<p><strong>The Reset: ∼ 1µs.</strong> Using this setup has been confirmed the target did not undergo a full on poweron reset. As a matter of fact, in the image attached below the chip behaves as
+if a different kind of reset, shorter ∼ 1µs - as further proof of deviation from <a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a>
+- , less impactful, has happened. The pin keeps clocking as always, just with a
+slower frequency.</p></div> <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/nRF52810_glitch_success_clock_slowdown.png" style="justify-content: center;max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 6:</strong> Clock slows down after successful glitch. - ROLL MODE
+</figcaption></figure></div>
+
+ <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/nRF52810_glitch_successful_stage1.png" style="justify-content: center;max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 7:</strong> Clock slows down after successful glitch.- ZOOMED IN
+</figcaption></figure></div>
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+
+<p> The chip’s content is dumped (or memory tampered with - more interestingly)
+within the first pulse. It is immediate if you select the right area (which does
+not have to be super precise as it has been glitched by holding the chipshouter
+by hand several - around 20 - times; if you consider the probe tip is almost as
+6big as the chip, you get the idea).</p>
+</div>
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+
+<p>    The type of reset is not a power-on reset which on <a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a> was on the order of
+magnitude of milliseconds. Here <a href="https://docs.nordicsemi.com/bundle/ps_nrf52810/page/power.html#ariaid-title18" target="_blank">[2]</a> on the ”Reset Behavior” paragraph there is
+a table encompassing all possible resets and the one involving the experiment
+has to be out of exclusion one of the following:
+</p>   </div>  <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/resets_table.png" style="max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 8:</strong> nRF52 family reset table.
+</figcaption></figure></div>
+<div id="post-content" style="justify-content: left ;display: flex">
+
+<p>
+<ul>
+<li> Watchdog reset</li>
+<li> Pin reset</li>
+</ul>
+</p></div>
+
+
+
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+
+        <p>
+            <strong>DRAM as a (mechanical) protective factor.</strong> Other experiments on the other chips belonging to the nRF52 family have been
+conducted. Interestingly enough, the bigger the physical footprint of the RAM
+7the less likely to be glitched successfully (or corrupted). As of today only the
+nrf52810 was glitched successfully at runtime, however it is worth noticing that
+the nrf52832, for instance, gets lots of ”Error reading AP” or other errors indicating some kind of corruption happening. And SoCs with bigger RAM in the
+same family have even less of these errors.
+            </p>
+        </div>
+        <div id="post-content" style="justify-content: center ;display: flex; ">
+
+ <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/nRF52810_glitch_successful_but_resets_within_1_us_stage2.png" style="max-width: inherit; max-height: inherit;width: 300pt;" >
+  <figcaption><strong>Figure 9:</strong> nRF52810 Successful glitch presenting ∼ 1µs reset range.
+</figcaption></figure></div>
+</div>
+
+    <p>
+        <strong>Misbehaving while awake: Tale of a Runtime Hack.</strong> 
+         <div id="post-content" style="justify-content: center ;display: flex;width: 100%;"><figure>
+<img src="/static/images/setup1.jpeg" style="max-width: inherit; max-height: inherit;width: 250pt;height: 350pt" >
+<img src="/static/images/setup2.jpeg" style="max-width: inherit; max-height: inherit;width: 250pt; height: 350pt" >
+
+  <figcaption><strong>Figure 10:</strong> First setup reproduced at home and second setup reproduced at work.
+</figcaption></figure></div>
+        </p>
+
+            <strong>References.</strong>
+            <ul>
+            <li><a href="https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/" target="_blank">[1]</a> https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/</li>
+            <li><a href="https://docs.nordicsemi.com/bundle/ps_nrf52810/page/power.html#ariaid-title18" target="_blank">[2]</a >https://limitedresults.com/2020/06/nrf52-debug-resurrection-approtect-bypass/</li>
+            <li><a href="https://eu.mouser.com/datasheet/2/297/nRF52_DK_User_Guide_v1_3_1-3011302.pdf" target="_blank">[3]</a> https://eu.mouser.com/datasheet/2/297/nRF52_DK_User_Guide_v1_3_1-3011302.pdf</li>
+            <li><a href="https://eu.mouser.com/datasheet/2/889/isp_ble_DS1507-1221980.pdf/" target="_blank">[4]</a> https://eu.mouser.com/datasheet/2/889/isp_ble_DS1507-1221980.pdf/</li>
+            <li><a href="https://www.newae.com/products/nae-cw520" target="_blank">[5]</a> https://www.newae.com/products/nae-cw520</li>
+            <li><a href="https://sensepeek.com/pcbite-20" target="_blank">[6]</a> https://sensepeek.com/pcbite-20</li> 
+            <li><a href="https://www.segger.com/products/debug-probes/j-link/models/j-link-edu-mini/" target="_blank">[7]</a> https://www.segger.com/products/debug-probes/j-link/models/j-link-edu-mini/</li>
+            <li><a href="https://sensepeek.com/sq500-500mhz-handsfree-oscilloscope-probe/" target="_blank">[8]</a> https://sensepeek.com/sq500-500mhz-handsfree-oscilloscope-probe/</li>
+            <li><a href="https://nam.cnit.it/" target="_blank">[9]</a> https://nam.cnit.it/</li>
+            <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-9709" target="_blank">[10]</a> https://nvd.nist.gov/vuln/detail/CVE-2025-9709</li>                                     
+
+<div id="post-content" style="justify-content: center ;display: flex;width: 100%;">
+
+<p><strong>Thanks.</strong> Huge thanks to Federico Cerutti (<a href="https://github.com/ceres-c" target="_blank">@ceres-c</a>) for his help with setting up the automation for the nRF52 family chips attack, to Cristofaro Mune (<a href="https://x.com/pulsoid" target="_blank">@pulsoid</a>) for his mentorship 
+    and to @CNIT-Nam-Lab <a href="https://nam.cnit.it/" target="_blank">[9]</a> for sponsoring and believing in this work.
+    </div>
+</section>
+
+
+<footer>
+    Powered by <a href="https://gohugo.io/">Hugo</a>, using a modded (by <strong>@g0mb4ck</strong>) version of the theme <a
+        href="https://github.com/LuisSousaRego/Ardeidae">Ardeidae</a>
+</footer></body>
+
+</html>

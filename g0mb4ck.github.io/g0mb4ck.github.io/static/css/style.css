@@ -1,0 +1,308 @@
+/* general */
+
+html,
+body {
+    color: #C6C6C6;
+    margin: 0;
+    padding: 0;
+    background-color: #260061;
+    background: url("/static/images/gomboc.svg") center/cover no-repeat,
+    #260061;    
+    background-blend-mode:multiply;
+    background-size: 737px 737px;
+    opacity: 1;
+}
+
+
+a {
+    color: #e44e17
+}
+
+hr {
+    color: #e44e17
+}
+
+/* landing page */
+
+#landing {
+    display: flex;
+    height: 100%;
+}
+
+#landing a {
+    text-decoration: none;
+    color: #e44e17;
+}
+
+#landing ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#landing li {
+    margin-bottom: 2rem;
+    padding: 0;
+}
+
+#landing time {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    color: #e44e17;
+}
+
+#landing-content {
+    max-height: 100vh;
+    width: 45vw;
+    overflow: auto;
+    /* box-shadow: -3px 0px 15px 0px rgba(0, 0, 0, 0.50); */
+    padding: 0 0 0 2rem;
+}
+
+#landing-content footer {
+    color: #e44e17;
+    font-weight: bold;
+}
+
+#landing-content footer a {
+    text-decoration: underline;
+    color: #e44e17;
+}
+
+#posts-container {
+    font-size: 2.5rem;
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: bolder;
+    margin-top: 1.5rem;
+    padding: 0 10rem 0 0;
+}
+
+#posts-container a:hover {
+    text-decoration: underline;
+}
+
+#landing-canva {
+    width: 55%;
+}
+
+#landing-canva canvas {
+    display: block;
+    width: 100%;
+}
+
+/* header */
+
+header {
+    max-width: 800px;
+    margin: 1rem auto 0 auto;
+    line-height: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#site-title {
+    display: inline-block;
+    color: #e44e17;
+    border: 2px solid #e44e17;
+    padding: 0.6rem;
+    text-transform: uppercase;
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+#site-title:hover {
+    color: #260061;
+    background-color: #e44e17;
+}
+
+.site-header {
+  display: flex;
+  justify-content: center; 
+  align-items:    center;  
+
+}
+
+.header-group {
+    width: fit-content;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+}
+
+.header-icon {
+    text-decoration: none;
+    color: #e44e17;
+    padding: 0 0.3rem;
+}
+
+.header-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+code.hljs{display:block;overflow-x:auto;padding:1em}
+code.hljs{padding:3px 5px}
+code.hljs {
+    background: #260061;
+    padding: 2px 4px;     
+    border-radius: 3px;
+}
+.hljs {
+    background: #260061; 
+    color: #00FF00;       
+}
+.hljs-comment {
+    color: #e44e17
+}
+.hljs-tag{color:#00FF00}
+ .hljs-name{color:#e44e17}
+ .hljs-selector-tag{font-weight:700}
+ .hljs-type{color:#00FF00 }
+ .hljs-title{color:#00FF00;font-weight:700}
+ .hljs-variable{color:#e44e17}
+ .hljs-literal{color:#00FF00}
+.hljs-code{color:#00FF00}
+.hljs-meta{color:#e44e17}
+.hljs-string{color:#C6C6C6}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #260061;
+    z-index: 900;
+}
+
+#post {
+    margin: auto;
+    font-family: "Ubuntu Mono", monospace;
+    max-width: 800px;
+    font-size: 1.2rem;
+}
+
+#post-title {
+    color: #e44e17;
+    margin: 4rem 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+#post time {
+    color: #e44e17;
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+#post-content {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#after-post {
+    font-family: "Ubuntu Mono", monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    margin: 5rem auto;
+}
+
+#reply-by-email {
+    text-align: center;
+    color: #e44e17;
+    margin-top: 2rem;
+}
+
+#reply-by-email a {
+    border: 2px solid #e44e17;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.6rem;
+}
+
+#reply-by-email a:hover {
+    background-color: #e44e17;
+    color: #e44e17;
+}
+
+
+/* footer */
+
+footer {
+    font-family: "Ubuntu Mono", monospace;
+    color: #e44e17;
+    opacity: 0.75;
+    font-size: 1rem;
+    margin: 0 auto;
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+}
+
+/* others */
+
+img {
+    max-width: 100%;
+}
+
+.chroma {
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* media queries */
+
+@media only screen and (max-width: 992px) {
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 1rem;
+    }
+
+    .header-group {
+        padding: 1rem 0 0 0;
+    }
+
+    #landing {
+        flex-direction: column;
+        height: unset;
+    }
+
+    #landing header {
+        margin-left: 0;
+        padding-left: 2rem;
+    }
+
+    #landing-canva {
+        width: 100%;
+        height: 15rem;
+    }
+
+    #landing-content {
+        max-height: unset;
+        width: 100vw;
+        overflow: unset;
+        /* box-shadow: 0px -3px 15px 0px rgba(0, 0, 0, 0.50); */
+        padding: 0;
+    }
+
+    #posts-container {
+        margin-top: 4rem;
+        padding: 0 2rem;
+    }
+
+    #post {
+        padding: 0 1rem;
+    }
+
+    #after-post {
+        padding: 0 2rem;
+    }
+}

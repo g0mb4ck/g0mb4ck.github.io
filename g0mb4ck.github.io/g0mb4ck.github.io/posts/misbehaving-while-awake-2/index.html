@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coming soon...</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link defer rel="stylesheet" href="/css/syntax.css">
+    
+</head><body><header>
+    <a id="site-title" href="/">
+        Lunar Labs Project
+    </a>
+    <section id="social-links" class="header-group">
+        <a href=https://github.com/g0mb4ck class="header-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+        </a>
+        <a href=https://en.wikipedia.org/wiki/G%C3%B6mb%C3%B6c class="header-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+  <path d="M8 1.314C3.562-3.248-7.534 4.735 8 15c15.534-10.265 4.438-18.248 0-13.686z"/>
+</svg>
+
+        </a>
+
+<a href="/about.html" class="header-icon">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-moon" viewBox="0 0 16 16">
+  <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+</svg>
+</a>
+    </section>
+</header>
+
+<section id="post">
+    <h1 id="post-title">Coming soon...</h1>
+    <time>
+        7331-13-31
+    </time>
+    <hr />
+    <div id="post-content">
+<p>
+<pre>
+<code class="language-python">
+from chipshouter import ChipSHOUTER
+import serial
+from chipshouter.com_tools import Reset_Exception
+import random
+import subprocess
+import time
+import sys
+from tqdm.notebook import trange, tqdm
+
+cs = ChipSHOUTER('/dev/ttyUSB0')
+cs.armed = 1
+cs.mute = True
+cs.pulse.repeat = 1
+def test_swd():
+    try:
+        retval = subprocess.check_output(['openocd', '-f', '/interface/jlink.cfg', '-c', 
+        'transport select swd;',  '-f', '/usr/local/share/openocd/scripts/target/nrf52.cfg', 
+        '-c', 'init;halt;dump_image nrf52_dumped2.bin 0x0 0x80000; exit'], stderr=subprocess.STDOUT)
+        return b'processor detected' in retval
+    except:
+        return False
+
+while True:
+    try:
+        cs.voltage = random.randint(450, 500)
+        cs.pulse = 1
+        #print(subprocess.run(['openocd', '-f', '/interface/jlink.cfg', '-c', 
+        'transport select swd; adapter serial 801051872',  '-f', 
+        '/usr/local/share/openocd/scripts/target/nrf52.cfg', '-c', 
+        'init;halt;dump_image nrf52_dumped2.bin 0x0 0x80000; exit'], stderr=subprocess.STDOUT))
+        cs.pulse = 1
+        time.sleep(1)
+        if test_swd():
+            print("!")
+            sys.exit(0)
+        else:
+            print('.', end='', flush=True)
+    except Reset_Exception:
+        print("Device rebooted!")
+        time.sleep(5) 
+
+
+</code>
+</pre>
+</p>  </div>
+</section>
+
+
+
+<footer>
+    Powered by <a href="https://gohugo.io/">Hugo</a>, using a modded (by <strong>@g0mb4ck</strong>) version of the theme <a
+        href="https://github.com/LuisSousaRego/Ardeidae">Ardeidae</a>
+</footer></body>
+
+</html>
